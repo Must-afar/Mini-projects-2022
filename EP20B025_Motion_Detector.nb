@@ -1,0 +1,413 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     15082,        405]
+NotebookOptionsPosition[     13139,        373]
+NotebookOutlinePosition[     13650,        391]
+CellTagsIndexPosition[     13607,        388]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+  "LIST", " ", "OF", " ", "FUNCTIONS", " ", "THAT", " ", "WILL", " ", "BE", 
+   " ", "USEFUL", " ", "FOR", " ", "THE", " ", "LAB", " ", "3"}], 
+  "*)"}]], "Code",ExpressionUUID->"082bf060-d543-41ec-a7ee-fce75be41e07"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"IMAQ`StartCamera", "[", "]"}], ";", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Starts", " ", "the", " ", "camera"}], "*)"}], "\n", 
+  RowBox[{"IMAQ`StopCamera", "[", "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"Stops", " ", "the", " ", "camera"}], "*)"}]}]], "Code",ExpressionU\
+UID->"2af11594-d79c-440c-9335-4604a199f159"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CurrentImage", "[", "]"}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{"Takes", " ", "a", " ", "single", " ", "snap"}], "*)"}], "\n", 
+  RowBox[{"CurrentImage", "[", "n", "]"}], ";", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Takes", " ", "n", " ", "successive", " ", "images"}], 
+   "*)"}]}]], "Code",ExpressionUUID->"0484cfbe-5168-4c31-9f05-c32777319069"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Dynamic", "[", 
+   RowBox[{"CurrentImage", "[", "]"}], "]"}], ";", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "Note", " ", "the", " ", "use", " ", "of", " ", "the", " ", "function"}], 
+    ",", " ", 
+    RowBox[{
+     RowBox[{"Dynamic", ".", " ", "\n", "It"}], " ", "takes", " ", 
+     "continuously", " ", "images"}]}], "*)"}]}]], "Code",ExpressionUUID->\
+"b349a217-c65a-44bb-a401-3991880c22f4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Dynamic", "[", 
+   RowBox[{"ImageDifference", " ", "@@", " ", 
+    RowBox[{"CurrentImage", "[", "2", "]"}]}], "]"}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Continuously", " ", "takes", " ", "the", " ", "difference", " ", 
+    "between", "\n", "two", " ", "images"}], "*)"}]}]], "Code",ExpressionUUID->\
+"ad1c7359-8a59-4ddc-9fd6-561d77320844"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "A", " ", "Simple", " ", "example", " ", "for", " ", "image", " ", 
+    "analysis"}], " ", "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"IMAQ`StartCamera", "[", "]"}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Starts", " ", "the", " ", "camera"}], "*)"}], "\n", 
+    RowBox[{"myImage", " ", "=", " ", 
+     RowBox[{"CurrentImage", "[", "]"}]}]}], " ", 
+   RowBox[{"(*", 
+    RowBox[{"Takes", " ", "a", " ", "single", " ", "snap"}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"IMAQ`StopCamera", "[", "]"}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{"Stops", " ", "the", " ", "camera"}], "*)"}], "\n", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "An", " ", "RGB", " ", "colour", " ", "image", " ", "is", " ", "a", " ",
+        "multi", " ", "dimensiaonl", " ", "matrix"}], " ", "-", " ", 
+      RowBox[{"intensity", " ", 
+       RowBox[{"(", 
+        RowBox[{
+        "deppending", " ", "on", " ", "the", " ", "number", "\n", "of", " ", 
+         "bits"}], ")"}], " ", "as", " ", "a", " ", "function", " ", "of", 
+       " ", 
+       RowBox[{"(", 
+        RowBox[{"x", ",", "y"}], ")"}], " ", "coordinates"}]}], " ", "*)"}], 
+    " ", "\n", 
+    RowBox[{"grayImage", " ", "=", " ", 
+     RowBox[{"ColorConvert", "[", 
+      RowBox[{"myImage", ",", " ", "\"\<Grayscale\>\""}], "]"}]}]}], 
+   RowBox[{"(*", 
+    RowBox[{
+    "Converts", " ", "the", " ", "image", " ", "to", " ", "greyscale"}], 
+    "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"intensVals", " ", "=", " ", 
+     RowBox[{"Flatten", "@", 
+      RowBox[{"ImageData", "[", "grayImage", "]"}]}]}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{
+     "Converts", " ", "the", " ", "to", " ", "1", " ", "D", " ", "data", " ", 
+      "array"}], "*)"}], "  ", "\n", 
+    RowBox[{"v", " ", "=", " ", 
+     RowBox[{"Total", "[", "intensVals", "]"}], " ", 
+     RowBox[{"(*", " ", 
+      RowBox[{"sum", " ", "of", " ", "the", " ", "intensity", " ", "data"}], 
+      " ", "*)"}]}]}]}]}]], "Code",ExpressionUUID->"8737b8a0-3be7-46dc-8b42-\
+579c76b74839"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Alternate", " ", "way", " ", "to", " ", "access", " ", "the", " ", 
+    "camera"}], " ", "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"First", "@", 
+     RowBox[{"FindDevices", "[", "]"}]}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Lists", " ", "out", " ", "camera", " ", "devices"}], " ", 
+     "*)"}], "\n", 
+    RowBox[{"dev", " ", "=", " ", 
+     RowBox[{"DeviceOpen", "[", "\"\<Camera\>\"", "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"DeviceConfigure", "[", 
+     RowBox[{"dev", ",", " ", 
+      RowBox[{"\"\<FrameRate\>\"", " ", "->", " ", 
+       RowBox[{"1", "/", "6"}]}]}], "]"}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Configure", " ", "the", " ", "device", "  ", "parametrs"}], " ",
+      "*)"}], "\n", 
+    RowBox[{"Pause", "[", "2", "]"}], ";"}], " ", "\n", 
+   RowBox[{
+    RowBox[{"testImage", " ", "=", " ", 
+     RowBox[{"DeviceRead", "[", "dev", "]"}]}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Takes", " ", "a", " ", "snap"}], " ", "*)"}], "\n", 
+    RowBox[{"DeviceClose", "[", "dev", "]"}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"Stops", " ", "device", " ", "access"}], " ", "-", " ", 
+      RowBox[{
+      "else", " ", "the", " ", "dvice", " ", "will", " ", "be", " ", "on"}]}],
+      " ", "*)"}]}]}]}]], "Code",ExpressionUUID->"3dc86fb0-28c6-4075-b576-\
+f8df69063c62"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "A", " ", "good", " ", "example", " ", "for", " ", "while", " ", "loop"}], 
+   "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"tStop", " ", "=", " ", "3"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"t", " ", "=", " ", "0"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"keepLooping", " ", "=", " ", "True"}], ";"}], "\n", 
+   RowBox[{"While", "[", " ", 
+    RowBox[{"keepLooping", ",", "\n", " ", 
+     RowBox[{
+      RowBox[{"t", "++"}], ";", "\n", " ", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"t", " ", ">=", " ", "tStop"}], ",", "\n", "  ", 
+        RowBox[{"keepLooping", " ", "=", " ", "False"}], ",", "\n", "  ", 
+        RowBox[{
+         RowBox[{"Print", "[", "\"\<I am still looping !\>\"", "]"}], ";"}]}],
+        "\n", "  ", "]"}]}]}], "\n", " ", "]"}]}]}]], "Code",ExpressionUUID->\
+"64280987-4e27-41b1-9002-59a62540268a"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Some", " ", "functions", " ", "related", " ", "to", " ", "audio"}],
+   "*)"}]], "Code",ExpressionUUID->"92f4be05-aa04-434c-acf1-621f0121455a"],
+
+Cell[BoxData[
+ RowBox[{"Beep", "[", "]"}]], "Code",ExpressionUUID->"7e5a0153-2b67-41f4-86ab-504c7e261bb4"],
+
+Cell[BoxData[
+ RowBox[{"Play", "[", 
+  RowBox[{
+   RowBox[{"Sin", "[", 
+    RowBox[{"1500", " ", "2", " ", "Pi", " ", "t"}], "]"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", " ", "0", ",", " ", "1"}], "}"}]}], "]"}]], "Code",Expre\
+ssionUUID->"91d17e8d-6cfe-452c-91c3-72d2dc67fed1"],
+
+Cell[BoxData[
+ RowBox[{"Sound", "[", 
+  RowBox[{"SoundNote", "[", "]"}], "]"}]], "Code",ExpressionUUID->"8d2e6c0b-\
+8701-434a-8d17-93bd64b7d0d4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Note", " ", "the", " ", "audio", " ", "interface"}], " ", "*)"}], 
+  "\n", 
+  RowBox[{"Audio", "[", 
+   RowBox[{
+   "File", "[", "\"\</Users/kasi/Documents/2021/Test21/Bella-Mira.mp3\>\"", 
+    "]"}], "]"}]}]], "Code",ExpressionUUID->"42f4c491-9f84-484c-a405-\
+cafc3c13e04e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"EmitSound", "[", 
+   RowBox[{"Sound", "[", 
+    RowBox[{"SoundNote", "[", "]"}], "]"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Note", " ", "the", " ", "use", " ", "of", " ", "the", " ", "function", 
+    " ", "EmitSound"}], " ", "*)"}]}]], "Code",ExpressionUUID->"9240d1d4-1a52-\
+44fe-a899-b7e27ed08d58"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Good", " ", "code"}], " ", "-", " ", 
+     RowBox[{"has", " ", "dyanmically", " ", "updated", " ", "plot", " ", 
+      RowBox[{"(", 
+       RowBox[{"real", " ", "time", " ", "plot"}], ")"}]}]}], ",", " ", 
+    RowBox[{"user", " ", "defined", "\n", "function", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"to", " ", "creat", " ", "time", " ", "delay"}], ",", " ", 
+       RowBox[{"and", " ", "ListLinePlot"}]}], " "}]}]}], "*)"}], "\n", 
+  RowBox[{
+   RowBox[{"ClearAll", "[", "timeDelay", "]"}], "\n", 
+   RowBox[{
+    RowBox[{"timeDelay", "[", "x_", "]"}], " ", ":=", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"Pause", "[", "0.2", "]"}], ";", " ", "x"}], ")"}]}], "\n", 
+   "\n", 
+   RowBox[{"Dynamic", "[", 
+    RowBox[{"ListLinePlot", "[", "\n", "  ", 
+     RowBox[{"data", ",", "\n", "  ", 
+      RowBox[{"PlotRange", " ", "->", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "10"}], ",", " ", "10"}], "}"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "10"}], ",", " ", "10"}], "}"}]}], "}"}]}], ",", " ", 
+      RowBox[{"PlotRangePadding", " ", "->", " ", 
+       RowBox[{"Scaled", "[", "0.1", "]"}]}], ",", "\n", "  ", 
+      RowBox[{"Mesh", " ", "->", " ", "All"}], ",", " ", 
+      RowBox[{"MeshStyle", " ", "->", " ", "Red"}]}], "]"}], "\n", "]"}], 
+   "\n", "\n", 
+   RowBox[{
+    RowBox[{"data", " ", "=", " ", 
+     RowBox[{"{", "}"}]}], ";"}], " ", "\n", 
+   RowBox[{
+    RowBox[{"x", " ", "=", " ", 
+     RowBox[{"-", "10"}]}], ";"}], "\n", 
+   RowBox[{"While", "[", 
+    RowBox[{
+     RowBox[{"x", " ", "<=", " ", "10"}], ",", "\n", "  ", 
+     RowBox[{
+      RowBox[{"data", " ", "=", " ", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"data", ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", " ", 
+           RowBox[{"timeDelay", "[", "x", "]"}]}], "}"}]}], "]"}]}], ";", 
+      "\n", "  ", 
+      RowBox[{"x", "++"}]}]}], "\n", "]"}]}]}]], "Code",ExpressionUUID->\
+"3830f037-74de-4847-b05c-e4a45b8b5df5"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+     "Another", " ", "good", " ", "example", " ", "for", " ", "the", " ", 
+      "time", " ", "delayed", " ", "and", " ", "dynamically", " ", "axis"}], 
+     "-", " ", 
+     RowBox[{"scaled", " ", 
+      RowBox[{"plot", ".", " ", "\n", "Understand"}], " ", "this"}]}], ",", 
+    " ", 
+    RowBox[{
+    "though", " ", "you", " ", "may", " ", "not", " ", "need", " ", "it", " ",
+      "for", " ", "the", " ", "present", " ", "lab"}]}], " ", "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"data", " ", "=", " ", 
+     RowBox[{"{", "}"}]}], ";"}], "   ", "\n", 
+   RowBox[{
+    RowBox[{"freq", " ", "=", " ", 
+     RowBox[{".5", " ", "Pi"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"f", "[", "t_", "]"}], " ", ":=", " ", 
+     RowBox[{"Sin", "[", 
+      RowBox[{"freq", "*", "t"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"t", " ", "=", " ", "0"}], ";"}], "\n", 
+   RowBox[{"Grid", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", "\n", "   ", 
+       RowBox[{"Row", "[", 
+        RowBox[{"{", 
+         RowBox[{"\"\<t=\>\"", ",", " ", 
+          RowBox[{"Dynamic", "@", "t"}]}], "}"}], "]"}], "}"}], ",", "\n", 
+      "  ", 
+      RowBox[{"{", 
+       RowBox[{"Dynamic", "[", "\n", "    ", 
+        RowBox[{
+         RowBox[{"ListPlot", "[", 
+          RowBox[{"data", ",", " ", 
+           RowBox[{"PlotRange", " ", "->", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", " ", "t"}], "}"}], ",", " ", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"-", "1"}], ",", " ", "1"}], "}"}]}], "}"}]}], ",", 
+           " ", 
+           RowBox[{"ImageSize", " ", "->", " ", "Medium"}]}], "]"}], ",", 
+         "\n", "     ", 
+         RowBox[{"TrackedSymbols", " ", ":>", " ", 
+          RowBox[{"{", "t", "}"}]}]}], "]"}], "}"}]}], "\n", "  ", "}"}], 
+    "]"}], " ", "\n", "\n", 
+   RowBox[{
+    RowBox[{"RunScheduledTask", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"t", " ", "+=", " ", ".2"}], ";", " ", 
+        RowBox[{"current", " ", "=", " ", 
+         RowBox[{"f", "[", "t", "]"}]}], ";", " ", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"data", ",", " ", "current"}], "]"}]}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"0.1", ",", " ", "200"}], "}"}]}], "]"}], ";"}]}]}]], "Code",Ex\
+pressionUUID->"8b9e83b0-3222-478b-aa4b-848245e2e538"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RemoveScheduledTask", "[", 
+   RowBox[{"ScheduledTasks", "[", "]"}], "]"}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{"Stops", " ", "the", " ", "task"}], " ", "*)"}]}]], "Code",Expressi\
+onUUID->"ee8df70d-5c9f-4944-9870-2520c0248bf4"]
+},
+WindowSize->{1141.2, 580.1999999999999},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+TaggingRules->{
+ "WelcomeScreenSettings" -> {"FEStarting" -> False}, "TryRealOnly" -> False},
+FrontEndVersion->"12.2 for Microsoft Windows (64-bit) (December 12, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"ed30c5fc-2bef-4ca9-b70e-a082d0b5e08b"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 258, 5, 49, "Code",ExpressionUUID->"082bf060-d543-41ec-a7ee-fce75be41e07"],
+Cell[819, 27, 352, 8, 68, "Code",ExpressionUUID->"2af11594-d79c-440c-9335-4604a199f159"],
+Cell[1174, 37, 384, 8, 68, "Code",ExpressionUUID->"0484cfbe-5168-4c31-9f05-c32777319069"],
+Cell[1561, 47, 445, 12, 68, "Code",ExpressionUUID->"b349a217-c65a-44bb-a401-3991880c22f4"],
+Cell[2009, 61, 382, 9, 68, "Code",ExpressionUUID->"ad1c7359-8a59-4ddc-9fd6-561d77320844"],
+Cell[2394, 72, 2074, 53, 188, "Code",ExpressionUUID->"8737b8a0-3be7-46dc-8b42-579c76b74839"],
+Cell[4471, 127, 1414, 36, 154, "Code",ExpressionUUID->"3dc86fb0-28c6-4075-b576-f8df69063c62"],
+Cell[5888, 165, 908, 24, 223, "Code",ExpressionUUID->"64280987-4e27-41b1-9002-59a62540268a"],
+Cell[6799, 191, 183, 3, 49, "Code",ExpressionUUID->"92f4be05-aa04-434c-acf1-621f0121455a"],
+Cell[6985, 196, 106, 1, 49, "Code",ExpressionUUID->"7e5a0153-2b67-41f4-86ab-504c7e261bb4"],
+Cell[7094, 199, 290, 7, 49, "Code",ExpressionUUID->"91d17e8d-6cfe-452c-91c3-72d2dc67fed1"],
+Cell[7387, 208, 145, 3, 49, "Code",ExpressionUUID->"8d2e6c0b-8701-434a-8d17-93bd64b7d0d4"],
+Cell[7535, 213, 333, 9, 68, "Code",ExpressionUUID->"42f4c491-9f84-484c-a405-cafc3c13e04e"],
+Cell[7871, 224, 350, 9, 49, "Code",ExpressionUUID->"9240d1d4-1a52-44fe-a899-b7e27ed08d58"],
+Cell[8224, 235, 2142, 57, 326, "Code",ExpressionUUID->"3830f037-74de-4847-b05c-e4a45b8b5df5"],
+Cell[10369, 294, 2497, 69, 275, "Code",ExpressionUUID->"8b9e83b0-3222-478b-aa4b-848245e2e538"],
+Cell[12869, 365, 266, 6, 49, "Code",ExpressionUUID->"ee8df70d-5c9f-4944-9870-2520c0248bf4"]
+}
+]
+*)
+
